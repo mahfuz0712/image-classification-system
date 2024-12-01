@@ -1,5 +1,5 @@
 
-# Image Classification Project
+# Image Classification System
 
 This project implements an image classification system using TensorFlow and Keras. It trains a Convolutional Neural Network (CNN) on a custom dataset and saves the best model as `best.h5`.
 
