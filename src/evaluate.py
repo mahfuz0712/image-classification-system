@@ -4,16 +4,14 @@ from tensorflow.keras.models import load_model # type: ignore
 from src.data_preprocessing import load_data
 
 
+
+
 def evaluate_model():
-    # Load the trained model
-    model = load_model('../models/best.h5')  # Ensure correct path
+    # Unpack the return values from load_data
+    x_train, y_train, x_val, y_val = load_data()  # Assuming load_data now returns 4 variables
 
-    # Load test data
-    _, test_data = load_data()
-
-    # Evaluate metrics
-    y_pred = model.predict(test_data)
-
-    # Evaluate and print classification report
-    print("Classification Report:")
-    print(classification_report(test_data.labels, y_pred))
+    # Evaluate the model using validation data
+    model = load_model('../models/best.keras')  # Ensure you're loading the correct model
+    loss, accuracy = model.evaluate(x_val, y_val)
+    
+    print(f"Evaluation results - Loss: {loss}, Accuracy: {accuracy}")

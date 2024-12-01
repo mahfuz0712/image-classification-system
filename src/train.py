@@ -14,7 +14,7 @@ def train_model():
     model = build_model(num_classes)
     
     # Define callbacks
-    checkpoint = ModelCheckpoint('../models/best.h5', monitor='val_accuracy', save_best_only=True, mode='max', verbose=1)
+    checkpoint = ModelCheckpoint('../models/best.keras', monitor='val_accuracy', save_best_only=True, mode='max', verbose=1)
     early_stopping = EarlyStopping(monitor='val_loss', patience=5, verbose=1)
     
     # Train the model
@@ -26,4 +26,5 @@ def train_model():
         callbacks=[checkpoint, early_stopping]
     )
     
-    print("Training complete. Best model saved as 'best.h5' in models directory.")
+    print("Training complete. Best model saved as 'best.keras' in models directory.")
+    ## best.h5 is deppreacated
