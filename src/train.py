@@ -4,7 +4,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping # type: ig
 
 def train_model():
     # Load and augment data
-    x_train, y_train = load_data()
+    x_train, y_train, _, _ = load_data()
     augmented_data = augment_images(x_train, y_train)
     
     # Get the number of classes
@@ -22,7 +22,7 @@ def train_model():
         augmented_data,
         steps_per_epoch=len(augmented_data),
         epochs=25,
-        validation_data=(x_train, y_train),  # Using original data for validation
+        validation_data=(x_train, y_train),
         callbacks=[checkpoint, early_stopping]
     )
     

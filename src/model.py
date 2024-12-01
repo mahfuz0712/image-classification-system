@@ -25,4 +25,8 @@ def build_model(num_classes):
     model.compile(optimizer=Adam(learning_rate=0.001),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
+
+    # Inspect model
+    model.summary()
+
     return model

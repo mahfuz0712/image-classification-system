@@ -5,6 +5,15 @@ import tensorflow as tf
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+from tensorflow.keras.models import load_model # type: ignore
+
+# Your previously defined function for training the model
+def train_model():
+    # Assuming you have already trained and saved the model (best.h5)
+    model = load_model('models/best.h5')  # Load the saved model
+    
+    # Additional training-related code...
+    return model
 
 # SHAP Example
 def explain_with_shap(model, x_train, x_test):
@@ -42,3 +51,23 @@ def gradcam(model, x_test):
     heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
     superimposed_img = heatmap * 0.4 + x_test[0]
     cv2.imwrite("gradcam_output.jpg", superimposed_img)
+
+# Main function to run everything
+def main():
+    # Train and evaluate the model first
+    model = train_model()
+
+    # Load sample data (change this based on your dataset)
+    x_train, y_train, x_test, y_test = load_data()
+
+    # Call SHAP
+    explain_with_shap(model, x_train, x_test)
+
+    # Call LIME
+    explain_with_lime(model, x_test)
+
+    # Call GradCAM
+    gradcam(model, x_test)
+
+if __name__ == "__main__":
+    main()

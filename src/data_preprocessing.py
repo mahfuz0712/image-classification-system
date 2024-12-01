@@ -1,22 +1,21 @@
 # src/data_preprocessing.py
-
+from pytbangla import computer as mahfuz
 from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
 import numpy as np
 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
-import numpy as np
+
 
 def load_data():
     # Initialize data generators
-    datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2)  # Add validation split
+    datagen = ImageDataGenerator(rescale=1./255, validation_split=0.2)
 
     # Load training data
     train_data = datagen.flow_from_directory(
         'datasets/train',
         target_size=(224, 224),
-        batch_size=32,
+        batch_size=16,
         class_mode='categorical',
-        subset='training'  # Use the training split
+        subset='training'
     )
 
     # Load testing data
@@ -25,10 +24,14 @@ def load_data():
         target_size=(224, 224),
         batch_size=16,
         class_mode='categorical',
-        subset='validation'  # Use the validation split
+        subset='validation'
     )
 
-    return train_data, test_data
+    # Convert to numpy arrays
+    x_train, y_train = next(train_data)
+    x_test, y_test = next(test_data)
+
+    return x_train, y_train, x_test, y_test
 
 # Function to augment images
 def augment_images(x_train, y_train):
@@ -54,4 +57,5 @@ def augment_images(x_train, y_train):
 if __name__ == '__main__':
     x_train, y_train = load_data()
     augmented_images = augment_images(x_train, y_train)
-    print("Augmented images are ready!")
+    mahfuz.lekho("Augmented images are ready!")
+    mahfuz.lekho(augmented_images)

@@ -22,7 +22,7 @@ def grad_cam(model, img_array, layer_name):
 
 def explain_model():
     # Load the trained model
-    model = load_model('best.keras')
+    model = load_model('best.h5')  # Ensure correct extension
 
     # Load a sample image (example)
     img_path = 'path_to_your_sample_image.jpg'
@@ -30,7 +30,7 @@ def explain_model():
     img_array = np.expand_dims(image.img_to_array(img) / 255.0, axis=0)
 
     # Generate Grad-CAM
-    heatmap = grad_cam(model, img_array, 'last_conv_layer_name')  # Replace with your model's last conv layer
+    heatmap = grad_cam(model, img_array, 'last_conv_layer_name')
     plt.matshow(heatmap)
     plt.title("Grad-CAM Heatmap")
     plt.show()
