@@ -1,23 +1,21 @@
 # augmentation starts here
+from pytbangla import computer as mahfuz
 from src.data_preprocessing import load_data, augment_images
+from src.train import train_model
+from src.evaluate import evaluate_model
 
 
 
 def main():
-    # Load data (images and labels)
     x_train, y_train = load_data()
-    
-    # Augment images
     augmented_images = augment_images(x_train, y_train)
-    
-    # Proceed with the model or any other task
-    print("Augmented images are ready!")
-    
-    # You can now use the augmented_images for training your model
-    # model.fit(augmented_images, epochs=10)
+    mahfuz.lekho("Augmented images are ready!")
+    mahfuz.lekho(augmented_images)
+    # Train the model
+    train_model()
+    # Evaluate the model after training
+    evaluate_model()
    
-
-
 
 if __name__ == "__main__":
     main()
