@@ -1,5 +1,5 @@
 # src/data_preprocessing.py
-from pytbangla import computer as mahfuz
+
 from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
 import numpy as np
 
@@ -57,5 +57,5 @@ def augment_images(x_train, y_train):
 if __name__ == '__main__':
     x_train, y_train = load_data()
     augmented_images = augment_images(x_train, y_train)
-    mahfuz.lekho("Augmented images are ready!")
-    mahfuz.lekho(augmented_images)
+    print("Augmented images are ready!")
+    print(augmented_images)

@@ -78,14 +78,18 @@ def explain_with_shap(model, x_train, x_test):
     # Flatten the image (from shape (224, 224, 3) to (224*224*3,))
     x_test_sample_single_flattened = x_test_sample_single.flatten()  # Shape becomes (224*224*3,)
     
-    # Now use SHAP with the original 4D data for x_train and the flattened x_test image
+    # Reshape the flattened image to (1, 224*224*3), so SHAP can handle it as a single batch
+    x_test_sample_single_flattened_batch = x_test_sample_single_flattened.reshape(1, -1)  # Shape becomes (1, 224*224*3)
+    
+    # Now use SHAP with the original 4D data for x_train and the reshaped x_test image
     explainer = shap.KernelExplainer(model.predict, x_train_sample)
-    shap_values = explainer.shap_values(x_test_sample_single_flattened)  # Pass the flattened image here
+    
+    # Compute SHAP values for the reshaped image
+    shap_values = explainer.shap_values(x_test_sample_single_flattened_batch)  # Pass the reshaped image here
     
     # Visualize the SHAP values
     shap.initjs()
-    shap.force_plot(explainer.expected_value[0], shap_values[0], x_test_sample_single_flattened)
-
+    shap.force_plot(explainer.expected_value[0], shap_values[0], x_test_sample_single_flattened_batch[0])
 
 # LIME Example
 def explain_with_lime(model, x_test):

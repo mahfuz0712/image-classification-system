@@ -1,4 +1,4 @@
-from pytbangla import computer as mahfuz
+
 from src.data_preprocessing import load_data, augment_images
 from src.train import train_model
 from src.evaluate import evaluate_model
@@ -9,10 +9,10 @@ def main():
 
     # Augment the training images
     augmented_images = augment_images(x_train, y_train)
-    mahfuz.lekho("Augmented images are ready!")
+    print("Augmented images are ready!")
 
     # Print the augmented image data (optional, for debugging or verification)
-    mahfuz.lekho(str(augmented_images))  # Ensuring that it's a string to avoid potential issues
+    print(str(augmented_images))  # Ensuring that it's a string to avoid potential issues
 
     # Train the model
     train_model()
